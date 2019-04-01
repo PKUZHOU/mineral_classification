@@ -1,0 +1,4 @@
+torch=1.0.0
+opencv-python
+matplotlib=2.1.0
+numpy=1.14.6

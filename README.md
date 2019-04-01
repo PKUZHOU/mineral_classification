@@ -34,8 +34,7 @@
 * 测试
 
   在test.py中修改模型和mineral_data文件夹路径，然后运行以下命令测试
-
-```
+  ```
   python test.py
   ```
 

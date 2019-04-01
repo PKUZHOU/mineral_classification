@@ -1,8 +1,5 @@
 from matplotlib import pyplot as plt
 from matplotlib.backends.backend_pdf import PdfPages
-import numpy as np
-# plt.rcParams['font.sans-serif']=['SimHei']
-# plt.rcParams['axes.unicode_minus']=False
 def draw_loss():
     pdf = PdfPages("loss.pdf")
 
@@ -46,4 +43,5 @@ def draw_train_acc():
         pdf.close()
 
 if __name__ == '__main__':
+    draw_loss()
     draw_train_acc()

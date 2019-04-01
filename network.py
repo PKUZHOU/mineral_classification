@@ -98,7 +98,7 @@ class Bottleneck(nn.Module):
 
 class ResNet(nn.Module):
 
-    def __init__(self, block, layers, num_classes=1000, zero_init_residual=False):
+    def __init__(self, block, layers, num_classes=1000, zero_init_residual=False,drop_out = 0.5):
         super(ResNet, self).__init__()
         self.inplanes = 64
         self.conv1 = nn.Conv2d(3, 64, kernel_size=7, stride=2, padding=3,
@@ -112,6 +112,7 @@ class ResNet(nn.Module):
         self.layer4 = self._make_layer(block, 512, layers[3], stride=2)
         self.avgpool = nn.AdaptiveAvgPool2d((1, 1))
         self.fc = nn.Linear(512 * block.expansion, num_classes)
+        self.dropout = nn.Dropout(drop_out)
 
         for m in self.modules():
             if isinstance(m, nn.Conv2d):
@@ -159,8 +160,10 @@ class ResNet(nn.Module):
 
         x = self.avgpool(x)
         x = x.view(x.size(0), -1)
-        x = self.fc(x)
 
+        if(self.training):
+            x = self.dropout(x)
+        x = self.fc(x)
         return x
 
 

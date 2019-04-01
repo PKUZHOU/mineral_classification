@@ -16,7 +16,6 @@ def adjust_learning_rate(optimizer, decay_rate=.1):
 def trainandsave(args):
 
     loss_log = open("loss_log.txt",'w')
-
     trainData = MyDataset('train.txt',train=True)
     testData = MyDataset('val.txt',train=False)
     train_loader = DataLoader(trainData,batch_size=args.batch,num_workers=4,shuffle=True)
@@ -82,13 +81,10 @@ def trainandsave(args):
     loss_log.close()
     print('Finished Training')
 
-    # torch.save(net.state_dict(), 'net_params.pkl')
-
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument("-batch",type=int,default="64")
-    parser.add_argument("-data_path",type=str,default='/home/zhou/mineral_data/trainval')
     parser.add_argument("-gpu",type=bool,default=True)
     parser.add_argument("-lr", type=float, default='0.001')
     parser.add_argument("-momentum",type=float,default='0.9')

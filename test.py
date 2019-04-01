@@ -5,11 +5,17 @@ import os
 import numpy as np
 import torch.nn.functional as f
 
-net = torch.load("models/net_4.pkl")
+
+model = "models/net_2.pkl"
+val_path = "/home/zhou/mineral_data/test"
+
+if(not os.path.isdir('failed_cases')):
+    os.mkdir('failed_cases')
+
+net = torch.load(model)
 net.eval()
 net = net.cuda()
 
-val_path = "/home/zhou/mineral_data/test"
 minerals = os.listdir(val_path)
 
 classes = {0:'biotite', 1:'hornblende', 2:'olivine', 3:'quartz', 4:'garnet'}
@@ -34,11 +40,7 @@ for mineral in minerals:
         if (pred_class == mineral):
             correct += 1
         else:
-            # print (pred_class,mineral)
-            # print ("prob ",pred*100,"%")
-            # cv2.imshow("test",cv_image)
             cv2.imwrite("failed_cases/"+pred_class+"_"+mineral+"_"+str(pred)+'.jpg',cv_image)
-            # cv2.waitKey(0)
         total += 1
 
     print(mineral, " accuracy ",correct/float(total))

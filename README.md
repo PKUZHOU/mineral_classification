@@ -11,6 +11,12 @@
   ```
   pip install -r requirements.txt
   ```
+  
+* **数据集下载**
+
+  链接：https://pan.baidu.com/s/1Ht_v6UZH_vM8je6Ylm1ubg 
+  提取码：8pf7 
+  
 * **数据集生成**
   
   将`data.py`中的root改为mineral_data文件夹的地址
